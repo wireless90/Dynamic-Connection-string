@@ -18,6 +18,9 @@ namespace CA.Application.Common.Interfaces
 ```
 
 ### 2. Implement SetConnectionString method in CompanyDbContext (Persistence Layer)
+
+Nuget to install: Microsoft.EntityFrameworkCore.Relational
+
 ```cs 
 using CA.Application.Common.Interfaces;
 using CA.Domain;
@@ -58,7 +61,6 @@ public async Task<ActionResult> Index(string connectionString)
 
 ### 4. Change Connection String at Runtime (Application Layer)
 
-Nuget to install: Microsoft.EntityFrameworkCore.Relational
 
 ```cs 
 using CA.Application.Common.Interfaces;
