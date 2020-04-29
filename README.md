@@ -50,6 +50,9 @@ public async Task<ActionResult> Index(string connectionString)
 ```
 
 ### 4. Change Connection String at Runtime (Application Layer)
+
+Nuget to install: Microsoft.EntityFrameworkCore.Relational
+
 ```cs 
 public class GetAllEmployeesHandler : IRequestHandler<GetAllEmployeesQuery, List<Employee>>
 {
