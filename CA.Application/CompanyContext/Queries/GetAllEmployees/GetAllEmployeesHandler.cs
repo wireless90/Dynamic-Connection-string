@@ -21,8 +21,8 @@ namespace CA.Application.CompanyContext.Queries.GetAllEmployees
 
         public async Task<List<Employee>> Handle(GetAllEmployeesQuery request, CancellationToken cancellationToken)
         {
-            //Here assign the new connection string
-            _companyDbContext.DatabaseFacade.GetDbConnection().ConnectionString = request.ConnectionString;
+            //Set new connection string
+            _companyDbContext.SetConnectionString(request.ConnectionString);
 
             //Connection would only be opend when ToListAsync is called
             return await _companyDbContext.Employees.ToListAsync();

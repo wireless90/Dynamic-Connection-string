@@ -1,6 +1,5 @@
 ﻿using CA.Domain;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Infrastructure;
 
 namespace CA.Application.Common.Interfaces
 {
@@ -8,6 +7,6 @@ namespace CA.Application.Common.Interfaces
     {
         DbSet<Employee> Employees { get; set; }
 
-        DatabaseFacade   DatabaseFacade { get; set; }
+        void SetConnectionString(string connectionString);
     }
 }
