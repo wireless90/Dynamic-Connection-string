@@ -20,6 +20,7 @@ namespace CA.Web
         [HttpGet("api/v1/employees/{connectionString}")]
         public async Task<ActionResult> Index(string connectionString)
         {
+            //Just hardcoding for example
             connectionString = @"Data Source=DESKTOP-S0OLDPR\SQLEXPRESS;Initial Catalog=VidlyDB;Integrated Security=True";
             var result =  await _mediator.Send(new GetAllEmployeesQuery() { ConnectionString = connectionString });
 
