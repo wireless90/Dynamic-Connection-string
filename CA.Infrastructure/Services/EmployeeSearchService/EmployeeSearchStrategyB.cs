@@ -8,7 +8,7 @@ namespace CA.Infrastructure.Services.EmployeeSearchService
     {
         public IQueryable<Employee> Run(IQueryable<Employee> employees)
         {
-            return employees;
+            return employees.Where(x => x.Name.ToUpper().StartsWith("A"));
         }
     }
 }
