@@ -1,24 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Threading.Tasks;
-using CA.Application.Common.Extensions;
+﻿using CA.Application.Common.Extensions;
 using CA.Persistence;
 using CA.Persistence.Common.Extensions;
 using CA.Web.Common.IOC;
-using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.DependencyInjection.Extensions;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
+using System;
 
 namespace CA.Web
 {
@@ -37,7 +27,7 @@ namespace CA.Web
         
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
-            string wrongConnectionString = @"Data Source=DESKTOP-S0OLDPR\SQLEXPRESS;Initial Catalog=WRONGCONNECTIONSTRING;Integrated Security=True";
+            string wrongConnectionString = @"Data Source=DESKTOP-S0OLDPR\SQLEXPRESS;Initial Catalog=Vidly;Integrated Security=True";
             services.AddDbContext<CompanyDbContext>(options => options.UseSqlServer(wrongConnectionString));
 
             services.AddApplication()

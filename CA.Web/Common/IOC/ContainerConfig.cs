@@ -1,10 +1,11 @@
 ﻿using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using CA.Application.Common.Interfaces;
+using CA.Infrastructure.Common.IOC;
 using CA.Persistence;
+using CA.Persistence.Common.IOC;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using System;
 
 namespace CA.Web.Common.IOC
 {
@@ -16,9 +17,9 @@ namespace CA.Web.Common.IOC
 
             containerBuilder.Populate(serviceDescriptors);
 
-            containerBuilder.Register(c => c.Resolve<CompanyDbContext>())
-                .As<ICompanyDbContext>();
-
+            containerBuilder
+                .RegisterModule(new InfrastructureModule())
+                .RegisterModule(new PersistenceModule());
 
             return new AutofacServiceProvider(containerBuilder.Build());
         }

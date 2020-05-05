@@ -17,6 +17,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\CA.Application\CA.Application.csproj" />
+    <ProjectReference Include="..\CA.Infrastructure\CA.Infrastructure.csproj" />
     <ProjectReference Include="..\CA.Persistence\CA.Persistence.csproj" />
   </ItemGroup>
 

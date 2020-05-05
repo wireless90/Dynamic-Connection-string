@@ -12,7 +12,7 @@
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
-      "launchUrl": "api/v1/employees/putconnectionstringhere",
+      "launchUrl": "api/v1/employees/search/strategyA",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

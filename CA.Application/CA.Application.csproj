@@ -5,10 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="Common\IOC\Modules\" />
     <Folder Include="CompanyContext\Commands\" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="6.0.0" />
     <PackageReference Include="MediatR" Version="8.0.1" />
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="8.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.0" />
