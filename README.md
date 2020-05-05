@@ -1,9 +1,10 @@
 # Dynamic-Connection-string
 Shows how to use a connection string at runtime, using Clean Architecture
 
-### 1. Expose DatabaseFacade in ICompanyDbContext (Application Layer)
+### 1. Expose Method to change Connection String in ICompanyDbContext (Application Layer)
 ```cs 
-using Microsoft.EntityFrameworkCore.Infrastructure;
+using CA.Domain;
+using Microsoft.EntityFrameworkCore;
 
 namespace CA.Application.Common.Interfaces
 {
@@ -11,29 +12,38 @@ namespace CA.Application.Common.Interfaces
     {
         DbSet<Employee> Employees { get; set; }
 
-        DatabaseFacade   DatabaseFacade { get; set; }
+        void SetConnectionString(string connectionString);
     }
 }
 ```
 
-### 2. Implement DatabaseFacade as Property in CompanyDbContext (Persistence Layer)
+### 2. Implement SetConnectionString method in CompanyDbContext (Persistence Layer)
+
+Nuget to install: Microsoft.EntityFrameworkCore.Relational
+
 ```cs 
+using CA.Application.Common.Interfaces;
+using CA.Domain;
+using Microsoft.EntityFrameworkCore;
+
 namespace CA.Persistence
 {
     public class CompanyDbContext : DbContext, ICompanyDbContext
     {
         public DbSet<Employee> Employees { get; set; }
-        public DatabaseFacade DatabaseFacade { get; set; }
 
         public CompanyDbContext(DbContextOptions<CompanyDbContext> dbContextOptions)
             : base(dbContextOptions)
         {
-            DatabaseFacade = Database;
-            
         }
 
+        public void SetConnectionString(string connectionString)
+        {
+            Database.GetDbConnection().ConnectionString = connectionString;
+        }
     }
 }
+
 ```
 
 ### 3. Pass ConnectionString through Controller (Web Layer)
@@ -51,27 +61,38 @@ public async Task<ActionResult> Index(string connectionString)
 
 ### 4. Change Connection String at Runtime (Application Layer)
 
-Nuget to install: Microsoft.EntityFrameworkCore.Relational
 
 ```cs 
-public class GetAllEmployeesHandler : IRequestHandler<GetAllEmployeesQuery, List<Employee>>
+using CA.Application.Common.Interfaces;
+using CA.Domain;
+using MediatR;
+using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
+
+namespace CA.Application.CompanyContext.Queries.GetAllEmployees
 {
-    private readonly ICompanyDbContext _companyDbContext;
-
-    public GetAllEmployeesHandler(ICompanyDbContext companyDbContext)
+    public class GetAllEmployeesHandler : IRequestHandler<GetAllEmployeesQuery, List<Employee>>
     {
-        //Note: Connection is not yet opened here
-        _companyDbContext = companyDbContext;
+        private readonly ICompanyDbContext _companyDbContext;
 
-    }
+        public GetAllEmployeesHandler(ICompanyDbContext companyDbContext)
+        {
+            //Note: Connection is not yet opened here
+            _companyDbContext = companyDbContext;
+            
+        }
 
-    public async Task<List<Employee>> Handle(GetAllEmployeesQuery request, CancellationToken cancellationToken)
-    {
-        //Here assign the new connection string
-        _companyDbContext.DatabaseFacade.GetDbConnection().ConnectionString = request.ConnectionString;
+        public async Task<List<Employee>> Handle(GetAllEmployeesQuery request, CancellationToken cancellationToken)
+        {
+            //Set new connection string
+            _companyDbContext.SetConnectionString(request.ConnectionString);
 
-        //Connection would only be opend when ToListAsync is called
-        return await _companyDbContext.Employees.ToListAsync();
+            //Connection would only be opend when ToListAsync is called
+            return await _companyDbContext.Employees.ToListAsync();
+        }
     }
 }
+
 ```
