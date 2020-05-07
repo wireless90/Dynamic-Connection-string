@@ -20,7 +20,7 @@ namespace CA.Infrastructure.Common.IOC.Factories
         {
             switch(strategyName)
             {
-                case "GreaterThanSearch":
+                case "GreaterThanStrategy":
                     return (target, value) => target > value;
                 default:
                     throw new ArgumentException();

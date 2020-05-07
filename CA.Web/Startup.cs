@@ -27,7 +27,7 @@ namespace CA.Web
         
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
-            string wrongConnectionString = @"Data Source=DESKTOP-S0OLDPR\SQLEXPRESS;Initial Catalog=Vidly;Integrated Security=True";
+            string wrongConnectionString = @"Data Source=DESKTOP-S0OLDPR\SQLEXPRESS;Initial Catalog=VidlyDB;Integrated Security=True";
             services.AddDbContext<CompanyDbContext>(options => options.UseSqlServer(wrongConnectionString));
 
             services.AddApplication()

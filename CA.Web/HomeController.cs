@@ -36,8 +36,10 @@ namespace CA.Web
             //Just hardcoding for example
             SearchEmployeesQuery searchEmployeesQuery = new SearchEmployeesQuery()
             {
-                NameSearchStrategy = "ContainsSearch",
-                AgeSearchStrategy = "GreaterThanSearch"
+                NameSearchStrategy = "ContainsStrategy",
+                Name = "a",
+                AgeSearchStrategy = "GreaterThanStrategy",
+                Age = 3
             };
 
             var result = await _mediator.Send(searchEmployeesQuery, cancellationToken);
