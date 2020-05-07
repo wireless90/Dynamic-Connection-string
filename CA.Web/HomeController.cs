@@ -34,8 +34,13 @@ namespace CA.Web
         public async Task<ActionResult> EmployeeSearch(CancellationToken cancellationToken = new CancellationToken())
         {
             //Just hardcoding for example
-            
-            var result = await _mediator.Send(new SearchEmployeesQuery() { NameSearchStrategy = "A" }, cancellationToken);
+            SearchEmployeesQuery searchEmployeesQuery = new SearchEmployeesQuery()
+            {
+                NameSearchStrategy = "ContainsSearch",
+                AgeSearchStrategy = "GreaterThanSearch"
+            };
+
+            var result = await _mediator.Send(searchEmployeesQuery, cancellationToken);
 
             return Ok(result);
         }

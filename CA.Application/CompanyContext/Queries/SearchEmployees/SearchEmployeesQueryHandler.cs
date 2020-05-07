@@ -20,7 +20,9 @@ namespace CA.Application.CompanyContext.Queries.SearchEmployees
         public async Task<List<Employee>> Handle(SearchEmployeesQuery request, CancellationToken cancellationToken)
         {
             return await _employeeSearchService
-                .Execute(request.NameSearchStrategy)
+                .SearchName(request.NameSearchStrategy, request.Name)
+                .SearchAge(request.AgeSearchStrategy, request.Age)
+                .AsQueryable()
                 .ToListAsync(cancellationToken);
         }
     }

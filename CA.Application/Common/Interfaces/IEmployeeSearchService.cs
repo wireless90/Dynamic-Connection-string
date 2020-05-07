@@ -5,6 +5,10 @@ namespace CA.Application.Common.Interfaces
 {
     public interface IEmployeeSearchService
     {
-        IQueryable<Employee> Execute(string strategyName);
+        IEmployeeSearchService SearchName(string strategyName, string value);
+
+        IEmployeeSearchService SearchAge(string strategyName, int value);
+
+        IQueryable<Employee> AsQueryable();
     }
 }

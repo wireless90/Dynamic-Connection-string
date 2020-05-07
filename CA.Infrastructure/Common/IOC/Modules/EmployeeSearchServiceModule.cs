@@ -1,6 +1,6 @@
 ﻿using Autofac;
 using CA.Application.Common.Interfaces;
-using CA.Infrastructure.Common.Interfaces;
+using CA.Infrastructure.Common.IOC.Factories;
 using CA.Infrastructure.Services.EmployeeSearchService;
 using System;
 
@@ -10,26 +10,21 @@ namespace CA.Infrastructure.Common.IOC.Modules
     {
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterType<EmployeeSearchStrategyA>()
-                .AsSelf();
-            
-            builder.RegisterType<EmployeeSearchStrategyB>()
-                .AsSelf();
-
-            builder.Register<Func<string, IEmployeeSearchStrategy>>(context =>
+            builder.Register<Func<string, Func<string,string, bool>>>(context =>
             {
                 IComponentContext componentContext = context.Resolve<IComponentContext>();
                 return (strategyName) =>
                 {
-                    switch(strategyName)
-                    {
-                        case "A":
-                            return componentContext.Resolve<EmployeeSearchStrategyA>();
-                        case "B":
-                            return componentContext.Resolve<EmployeeSearchStrategyB>();
-                        default:
-                            throw new ArgumentException($"Invalid strategy: {strategyName}");
-                    }
+                    return EmployeeSearchStrategyFactory.GetStringStrategy(strategyName);
+                };
+            });
+
+            builder.Register<Func<string, Func<int, int, bool>>>(context =>
+            {
+                IComponentContext componentContext = context.Resolve<IComponentContext>();
+                return (strategyName) =>
+                {
+                    return EmployeeSearchStrategyFactory.GetIntStrategy(strategyName);
                 };
             });
 
