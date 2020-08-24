@@ -25,7 +25,7 @@ namespace CA.Application.CompanyContext.Queries.GetAllEmployees
             _companyDbContext.SetConnectionString(request.ConnectionString);
 
             //Connection would only be opend when ToListAsync is called
-            return await _companyDbContext.Employees.ToListAsync();
+            return await _companyDbContext.Employees.Include(x => x.Salary).ToListAsync();
         }
     }
 }

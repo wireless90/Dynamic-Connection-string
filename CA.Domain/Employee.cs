@@ -7,5 +7,7 @@
         public string Name { get; set; }
 
         public int Age { get; set; }
+
+        public Salaries Salary { get; set; }
     }
 }

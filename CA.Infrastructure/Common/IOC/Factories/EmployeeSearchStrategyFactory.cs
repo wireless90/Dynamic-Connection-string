@@ -1,30 +1,10 @@
-﻿using System;
+﻿using CA.Domain;
+using System;
+using System.Linq;
 
 namespace CA.Infrastructure.Common.IOC.Factories
 {
     public class EmployeeSearchStrategyFactory
     {
-        public static Func<string, string, bool> GetStringStrategy(string strategyName)
-        {
-            switch(strategyName)
-            {
-                case "ContainsStrategy":
-                    return (target, value) => target.Contains(value);
-                default:
-                    throw new ArgumentException();
-            }
-        }
-
-
-        public static Func<int, int, bool> GetIntStrategy(string strategyName)
-        {
-            switch(strategyName)
-            {
-                case "GreaterThanStrategy":
-                    return (target, value) => target > value;
-                default:
-                    throw new ArgumentException();
-            }
-        }
     }
 }

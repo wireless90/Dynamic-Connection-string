@@ -10,20 +10,13 @@ namespace CA.Application.CompanyContext.Queries.SearchEmployees
 {
     public class SearchEmployeesQueryHandler : IRequestHandler<SearchEmployeesQuery, List<Employee>>
     {
-        private readonly IEmployeeSearchService _employeeSearchService;
-
-        public SearchEmployeesQueryHandler(IEmployeeSearchService employeeSearchService)
+        public SearchEmployeesQueryHandler()
         {
-            _employeeSearchService = employeeSearchService;
         }
 
         public async Task<List<Employee>> Handle(SearchEmployeesQuery request, CancellationToken cancellationToken)
         {
-            return await _employeeSearchService
-                .SearchName(request.NameSearchStrategy, request.Name)
-                .SearchAge(request.AgeSearchStrategy, request.Age)
-                .AsQueryable()
-                .ToListAsync(cancellationToken);
+            return null;
         }
     }
 }
