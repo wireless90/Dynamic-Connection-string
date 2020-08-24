@@ -24,7 +24,7 @@ namespace CA.Web
         {
             //Just hardcoding for example
             connectionString = @"Data Source=DESKTOP-S0OLDPR\SQLEXPRESS;Initial Catalog=VidlyDB;Integrated Security=True";
-            var result =  await _mediator.Send(new GetAllEmployeesQuery() { ConnectionString = connectionString });
+            System.Collections.Generic.List<Domain.Employee> result = await _mediator.Send(new GetAllEmployeesQuery() { ConnectionString = connectionString });
 
             return Ok(result);
         }
@@ -42,7 +42,7 @@ namespace CA.Web
                 Age = 3
             };
 
-            var result = await _mediator.Send(searchEmployeesQuery, cancellationToken);
+            System.Collections.Generic.List<Domain.Employee> result = await _mediator.Send(searchEmployeesQuery, cancellationToken);
 
             return Ok(result);
         }

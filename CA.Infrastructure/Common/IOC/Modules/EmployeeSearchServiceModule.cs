@@ -6,7 +6,7 @@ namespace CA.Infrastructure.Common.IOC.Modules
     {
         protected override void Load(ContainerBuilder builder)
         {
-           
+
 
 
             base.Load(builder);

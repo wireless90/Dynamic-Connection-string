@@ -16,7 +16,7 @@ namespace CA.Application.CompanyContext.Queries.GetAllEmployees
         {
             //Note: Connection is not yet opened here
             _companyDbContext = companyDbContext;
-            
+
         }
 
         public async Task<List<Employee>> Handle(GetAllEmployeesQuery request, CancellationToken cancellationToken)

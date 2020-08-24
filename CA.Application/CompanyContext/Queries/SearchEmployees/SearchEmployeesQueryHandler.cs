@@ -1,7 +1,5 @@
-﻿using CA.Application.Common.Interfaces;
-using CA.Domain;
+﻿using CA.Domain;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;

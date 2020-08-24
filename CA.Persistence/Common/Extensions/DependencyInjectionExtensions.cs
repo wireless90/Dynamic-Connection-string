@@ -1,5 +1,4 @@
-﻿using CA.Application.Common.Interfaces;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 
 namespace CA.Persistence.Common.Extensions
 {

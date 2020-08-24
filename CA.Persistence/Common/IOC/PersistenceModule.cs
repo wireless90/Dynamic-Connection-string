@@ -12,5 +12,5 @@ namespace CA.Persistence.Common.IOC
 
             base.Load(builder);
         }
-    } 
+    }
 }
